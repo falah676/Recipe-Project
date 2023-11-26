@@ -4,7 +4,7 @@ import { FoodContext } from "../../context/CulinerContext";
 const FoodList = () => {
     const {dataCard} = useContext(FoodContext);
     return (
-        <div className="flex flex-wrap justify-center w-full gap-6">
+        <div className="flex flex-wrap justify-center w-full gap-6 lg:px-0 px-5">
               {
                 dataCard.map(item => (
                     <CardFood key={item.idMeal} data={item}/>

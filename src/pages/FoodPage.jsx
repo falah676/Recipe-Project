@@ -1,43 +1,47 @@
 import { useEffect, useState } from "react";
-import { TailSpin } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
 import FoodList from "../components/FoodList/FoodList";
-import { FoodProvider } from "../context/CulinerContext";
+import { FoodProvider, InternetContext } from "../context/CulinerContext";
 import { CategoryDetails } from "../utils/data";
+import ReactLoading from "react-loading";
+import { useContext } from "react";
+import Swal from "sweetalert2";
 
 const FoodPage = () => {
+    const checkOnlineStatus = useContext(InternetContext);
     const { name } = useParams();
     const [dataCard, setDataCard] = useState([]);
     const [isLoading, setIsLoading] = useState();
     useEffect(() => {
         const getList = async () => {
-            try {
-                setIsLoading(true)
-                const data = await CategoryDetails(name);
-                console.log(data);
-                setDataCard(data);
+            setIsLoading(true)
+            if (checkOnlineStatus) {
+                try {
+                    const data = await CategoryDetails(name);
+                    console.log(data);
+                    setDataCard(data);
+                    setIsLoading(false)
+                } catch (e) {
+                    console.error("Error fetching recipe:", e);
+                    setIsLoading(false);
+                    alert("Please check your connection")
+                }
+            } else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Sorry, we currently do not have Internet access.',
+                    })
                 setIsLoading(false)
-            } catch (e) {
-                console.error("Error fetching recipe:", e);
-                setIsLoading(false);
-                alert("Please check your connection")
             }
         }
         getList();
-    }, [name]);
+    }, [checkOnlineStatus, name]);
     console.log(dataCard);
     if (isLoading) {
         return <div className="h-screen flex bg-category-img bg-no-repeat bg-cover justify-center items-center">
-            <TailSpin
-                height="80"
-                width="80"
-                color="#4fa94d"
-                ariaLabel="tail-spin-loading"
-                radius="1"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-            />
+            <ReactLoading type={'spin'} color={'#4fa94d'} height={'5%'} width={'5%'} />
+
         </div>
     }
 

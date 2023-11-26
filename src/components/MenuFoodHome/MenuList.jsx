@@ -21,7 +21,7 @@ const MenuList = ({keyword}) => {
 
         return (
           <div className="flex flex-col items-center">
-            <div className="flex justify-center gap-10 flex-wrap flex-row mb-10 p-1 px-24">
+            <div  className="flex justify-center gap-10 flex-wrap flex-row mb-10 p-1 px-3 lg:px-24">
               {data.map((item) => (
                 <CardFood key={item.idMeal} data={item} />
               ))}

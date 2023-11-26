@@ -6,9 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      
       backgroundImage: {
         'hero-img': "url('/src/assets/bgfood.jpg')",
-        'category-img': "url('https://img.freepik.com/free-photo/spices-tomatoes-near-spaghetti-garlic_23-2147849739.jpg?size=626&ext=jpg')",
+        'category-img': "url('/src/assets/spices-tomatoes-near-spaghetti-garlic_23-2147849739.png')",
         'granit': "url('/src/assets/black-marble-patterned-texture-background-marble-thailand-abstract-natural-marble-black-white-design.png')",
         'food': "url('/src/assets/vegetables-set-left-black-slate.png')"
       },

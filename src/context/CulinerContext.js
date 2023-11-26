@@ -8,3 +8,5 @@ export const MenuContext = createContext();
 export const MenuProvider = MenuContext.Provider;
 export const CountryContext = createContext();
 export const CountryProvider = CountryContext.Provider;
+export const InternetContext = createContext();
+export const InternetProvider = InternetContext.Provider;
